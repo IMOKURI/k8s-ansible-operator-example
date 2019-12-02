@@ -1,0 +1,7 @@
+apiVersion: kuri.example.com/v1alpha1
+kind: Kuri
+metadata:
+  name: example-kuri
+spec:
+  # Add fields here
+  size: 3

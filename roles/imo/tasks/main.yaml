@@ -28,7 +28,7 @@
   k8s:
     state: "{{ state | default(omit) }}"
     definition:
-      kind: Serivce
+      kind: Service
       apiVersion: v1
       metadata:
         name: "{{ meta.name }}"
@@ -39,4 +39,4 @@
           - port: 80
             targetPort: 80
         selector:
-          name: "{{ meta.name }}"
+          app: imo

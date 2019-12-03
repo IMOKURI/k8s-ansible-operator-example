@@ -22,3 +22,18 @@
     vars:
       operations:
         - cleanup
+
+- version: v1alpha1
+  group: kabocha.example.com
+  kind: Kabocha
+  reconcilePeriod: 90s
+  manageStatus: false
+  role: /opt/ansible/roles/kabocha
+  vars:
+    phase:
+      - setup
+  finalizer:
+    name: finalizer.kabocha.example.com
+    vars:
+      phase:
+        - teardown

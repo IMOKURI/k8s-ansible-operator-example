@@ -1,0 +1,30 @@
+---
+- name: Collect Imo service info
+  k8s_info:
+    kind: Service
+    namespace: "{{ meta.namespace }}"
+    label_selectors:
+      - app = imo
+  register: imo_service
+
+- debug:
+    var: imo_service
+
+- name: Access Imo
+  uri:
+    url: "http://{{ item.status.loadBalancer.ingress.0.ip }}/"
+  with_items: "{{ imo_service.resources }}"
+  when: item.status.loadBalancer.ingress is defined and item.status.loadBalancer.ingress != []
+  register: imo_page
+
+- debug:
+    var: imo_page
+
+- name: Set status
+  k8s_status:
+    api_version: kabocha.example.com/v1alpha1
+    kind: Kabocha
+    name: "{{ meta.name }}"
+    namespace: "{{ meta.namespace }}"
+    status:
+      phase: "{{ phase }}"

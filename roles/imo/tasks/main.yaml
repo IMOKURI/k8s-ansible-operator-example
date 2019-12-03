@@ -33,6 +33,8 @@
       metadata:
         name: "{{ meta.name }}"
         namespace: "{{ meta.namespace }}"
+        labels:
+          app: imo
       spec:
         type: LoadBalancer
         ports:

@@ -22,7 +22,7 @@
     kind: Pod
     namespace: "{{ meta.namespace }}"
     field_selectors:
-      - status.phase=Succeeded
+      - status.phase = Succeeded
   register: kuri_pods
 
 - name: Delete completed Kuri pod

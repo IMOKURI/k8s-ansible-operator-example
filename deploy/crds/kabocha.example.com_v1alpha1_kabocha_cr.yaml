@@ -1,0 +1,8 @@
+apiVersion: kabocha.example.com/v1alpha1
+kind: Kabocha
+metadata:
+  name: example-kabocha
+  namespace: imokuri
+spec:
+  # Add fields here
+  dummy: Imo, Kuri and Kabocha

@@ -1,0 +1,13 @@
+---
+- debug:
+    var: operations
+
+- import_tasks: cleanup.yaml
+  when: ('cleanup' in operations)
+  tags:
+    - cleanup
+
+- import_tasks: deploy.yaml
+  when: ('deploy' in operations)
+  tags:
+    - deploy

@@ -1,0 +1,19 @@
+---
+- name: Deploy Kuri
+  k8s:
+    definition:
+      kind: Job
+      apiVersion: batch/v1
+      metadata:
+        name: "{{ meta.name }}"
+        namespace: "{{ meta.namespace }}"
+      spec:
+        template:
+          spec:
+            containers:
+              - name: kuri
+                image: busybox
+                args:
+                  - sleep
+                  - "10"
+            restartPolicy: Never

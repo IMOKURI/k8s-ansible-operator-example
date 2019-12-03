@@ -3,3 +3,22 @@
   group: imo.example.com
   kind: Imo
   role: /opt/ansible/roles/imo
+  finalizer:
+    name: finalizer.imo.example.com
+    vars:
+      state: absent
+
+- version: v1alpha1
+  group: kuri.example.com
+  kind: Kuri
+  reconcilePeriod: 30s
+  role: /opt/ansible/roles/kuri
+  vars:
+    operations:
+      - cleanup
+      - deploy
+  finalizer:
+    name: finalizer.kuri.example.com
+    vars:
+      operations:
+        - cleanup

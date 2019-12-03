@@ -2,6 +2,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: imo-operator
+  namespace: imokuri
 spec:
   replicas: 1
   selector:
@@ -16,23 +17,23 @@ spec:
       containers:
         - name: ansible
           command:
-          - /usr/local/bin/ao-logs
-          - /tmp/ansible-operator/runner
-          - stdout
+            - /usr/local/bin/ao-logs
+            - /tmp/ansible-operator/runner
+            - stdout
           # Replace this with the built image name
-          image: "{{ REPLACE_IMAGE }}"
-          imagePullPolicy: "{{ pull_policy|default('Always') }}"
+          image: "quay.io/imokuri/imo-operator:v0.0.1"
+          imagePullPolicy: Always
           volumeMounts:
-          - mountPath: /tmp/ansible-operator/runner
-            name: runner
-            readOnly: true
+            - mountPath: /tmp/ansible-operator/runner
+              name: runner
+              readOnly: true
         - name: operator
           # Replace this with the built image name
-          image: "{{ REPLACE_IMAGE }}"
-          imagePullPolicy: "{{ pull_policy|default('Always') }}"
+          image: "quay.io/imokuri/imo-operator:v0.0.1"
+          imagePullPolicy: Always
           volumeMounts:
-          - mountPath: /tmp/ansible-operator/runner
-            name: runner
+            - mountPath: /tmp/ansible-operator/runner
+              name: runner
           env:
             - name: WATCH_NAMESPACE
               valueFrom:

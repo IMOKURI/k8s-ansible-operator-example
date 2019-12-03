@@ -1,0 +1,37 @@
+---
+- name: Collect Kuri info
+  k8s_info:
+    kind: Job
+    namespace: "{{ meta.namespace }}"
+  register: kuri_jobs
+
+- name: Delete completed Kuri
+  k8s:
+    state: absent
+    definition:
+      kind: "{{ item.kind }}"
+      apiVersion: "{{ item.apiVersion }}"
+      metadata:
+        name: "{{ item.metadata.name }}"
+        namespace: "{{ item.metadata.namespace }}"
+  with_items: "{{ kuri_jobs.resources }}"
+  when: item.status.succeeded is defined and item.status.succeeded == 1
+
+- name: Collect Kuri pod info
+  k8s_info:
+    kind: Pod
+    namespace: "{{ meta.namespace }}"
+    field_selectors:
+      - status.phase=Succeeded
+  register: kuri_pods
+
+- name: Delete completed Kuri pod
+  k8s:
+    state: absent
+    definition:
+      kind: "{{ item.kind }}"
+      apiVersion: "{{ item.apiVersion }}"
+      metadata:
+        name: "{{ item.metadata.name }}"
+        namespace: "{{ item.metadata.namespace }}"
+  with_items: "{{ kuri_pods.resources }}"

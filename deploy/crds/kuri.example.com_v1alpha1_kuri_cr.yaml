@@ -2,6 +2,7 @@ apiVersion: kuri.example.com/v1alpha1
 kind: Kuri
 metadata:
   name: example-kuri
+  namespace: imokuri
 spec:
   # Add fields here
-  size: 3
+  dummy: I like IMO and KURI.

@@ -1,7 +1,0 @@
----
-- hosts: localhost
-  vars:
-    meta:
-      namespace: imokuri
-  roles:
-    - kabocha

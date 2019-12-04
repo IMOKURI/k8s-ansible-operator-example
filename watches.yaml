@@ -37,3 +37,13 @@
     vars:
       phase:
         - teardown
+
+- version: v1alpha1
+  group: katsudon.example.com
+  kind: KatsuDon
+  reconcilePeriod: 60s
+  role: /opt/ansible/roles/katsudon
+  finalizer:
+    name: finalizer.katsudon.example.com
+    vars:
+      state: absent

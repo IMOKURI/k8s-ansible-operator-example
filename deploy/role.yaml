@@ -80,3 +80,9 @@ rules:
       - "*"
     verbs:
       - "*"
+  - apiGroups:
+      - katsudon.example.com
+    resources:
+      - "*"
+    verbs:
+      - "*"

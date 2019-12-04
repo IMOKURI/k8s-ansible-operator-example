@@ -2,27 +2,7 @@
 - name: Deploy Imo
   k8s:
     state: "{{ state | default(omit) }}"
-    definition:
-      kind: Deployment
-      apiVersion: apps/v1
-      metadata:
-        name: "{{ meta.name }}"
-        namespace: "{{ meta.namespace }}"
-      spec:
-        replicas: "{{ size }}"
-        selector:
-          matchLabels:
-            app: imo
-        template:
-          metadata:
-            labels:
-              app: imo
-          spec:
-            containers:
-              - name: imo
-                image: nginx
-                ports:
-                  - containerPort: 80
+    definition: "{{ lookup('template', 'deploy.yaml') }}"
 
 - name: Deploy Imo service
   k8s:

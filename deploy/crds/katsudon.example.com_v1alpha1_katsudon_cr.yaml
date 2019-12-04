@@ -1,0 +1,13 @@
+apiVersion: katsudon.example.com/v1alpha1
+kind: KatsuDon
+metadata:
+  name: example-katsudon
+  namespace: imokuri
+spec:
+  # Add fields here
+  imo:
+    size: 3
+  kuri:
+    dummy: I like IMO and KURI.
+  kabocha:
+    dummy: Imo, Kuri and Kabocha

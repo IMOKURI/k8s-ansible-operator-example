@@ -1,0 +1,36 @@
+---
+- name: Deploy Imo
+  k8s:
+    state: "{{ state | default(omit) }}"
+    definition:
+      kind: Imo
+      apiVersion: imo.example.com/v1alpha1
+      metadata:
+        name: "example-imo"
+        namespace: "{{ meta.namespace }}"
+      spec:
+        size: "{{ imo.size }}"
+
+- name: Deploy Kuri
+  k8s:
+    state: "{{ state | default(omit) }}"
+    definition:
+      kind: Kuri
+      apiVersion: kuri.example.com/v1alpha1
+      metadata:
+        name: "example-kuri"
+        namespace: "{{ meta.namespace }}"
+      spec:
+        dummy: "{{ kuri.dummy }}"
+
+- name: Deploy Kabocha
+  k8s:
+    state: "{{ state | default(omit) }}"
+    definition:
+      kind: Kabocha
+      apiVersion: kabocha.example.com/v1alpha1
+      metadata:
+        name: "example-kabocha"
+        namespace: "{{ meta.namespace }}"
+      spec:
+        dummy: "{{ kabocha.dummy }}"

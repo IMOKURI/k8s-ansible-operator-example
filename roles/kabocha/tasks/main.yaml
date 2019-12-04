@@ -7,9 +7,6 @@
       - app = imo
   register: imo_service
 
-- debug:
-    var: imo_service
-
 - name: Access Imo
   uri:
     url: "http://{{ item.status.loadBalancer.ingress.0.ip }}/"
@@ -17,10 +14,9 @@
   when: item.status.loadBalancer.ingress is defined and item.status.loadBalancer.ingress != []
   register: imo_page
 
-- debug:
-    var: imo_page
+# TODO: Imoのaccess結果に応じて、Kabochaのstatusを変える。
 
-- name: Set status
+- name: Set Kabocha status
   k8s_status:
     api_version: kabocha.example.com/v1alpha1
     kind: Kabocha
@@ -28,3 +24,15 @@
     namespace: "{{ meta.namespace }}"
     status:
       phase: "{{ phase }}"
+
+- name: Check Kabocha status
+  k8s_info:
+    api_version: kabocha.example.com/v1alpha1
+    kind: Kabocha
+    name: "{{ meta.name }}"
+    namespace: "{{ meta.namespace }}"
+  register: kabocha_info
+
+- name: Display Kabocha info
+  debug:
+    var: kabocha_info

@@ -1,4 +1,5 @@
 ---
+# templateから読まないとreplicasがstring扱いとなってobjectが作成できない
 - name: Deploy Imo
   k8s:
     state: "{{ state | default(omit) }}"

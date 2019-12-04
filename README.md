@@ -16,6 +16,10 @@ nginxが起動するDeploymentとServiceが作成されます。
 
 (Imoで起動したnginxにアクセスして、)customのstatusをセットします。
 
+### Kind: KatsuDon
+
+ImoとKuriとKabochaを起動します。
+
 ## ToDo
 
 - moleculeでのテスト
